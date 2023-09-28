@@ -1,6 +1,13 @@
-// let firstNumber = parseInt(prompt ('First Namber'))
-// let operator = prompt('add | subtract | multiply | divide','add subtract multiply divide' )
-// let secondNumber = parseInt(prompt ('Second Number'))
+const display = document.querySelector('.valueDisplay');
+let displayResult = display.textContent = 0;
+// output botton's value
+const valueButton = document.querySelectorAll('.item')
+valueButton.forEach(valueButton => {
+    valueButton.addEventListener('click', (event) =>{
+        const target = event.target;
+        display.textContent = target.textContent 
+    })
+})
 
 function add (firstNumber, secondNumber){
     return firstNumber + secondNumber;
@@ -18,11 +25,6 @@ function divide (firstNumber, secondNumber){
     return firstNumber / secondNumber;
 }
 
-// add(firstNumber, secondNumber)
-// subtract(firstNumber, secondNumber)
-// multiply(firstNumber, secondNumber)
-// divide(firstNumber, secondNumber)
-
 function operate(firstNumber, operator, secondNumber) {
     if (operator === "add"){
         return add(firstNumber, secondNumber) 
@@ -34,4 +36,4 @@ function operate(firstNumber, operator, secondNumber) {
         return divide(firstNumber, secondNumber) 
     }
 }
-console.log("1:", operate(firstNumber, operator, secondNumber))
+// console.log("1:", operate(firstNumber, operator, secondNumber))

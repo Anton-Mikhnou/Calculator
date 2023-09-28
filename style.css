@@ -18,23 +18,43 @@ body{
     align-items: center;
     justify-content: center;
     width: 300px;
-    height: 370px;
+    height: 420px;
     background-color: aquamarine;
 }
 
 .display{
     width: 240px;
     height: 80px;
-    background-color: black;
+    background-color: white;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+
+.valueDisplay{
+    /* color: white; */
+    font-size: 40px;
 }
 
 .panel{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     background-color: brown;
     max-width: 290px;
-    max-height: 260px;
+    max-height: 320px;
+}
+
+.itemClear{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.itemEqual{
+    grid-column-start:3;
+    grid-column-end:5;
 }
 
 .item{
