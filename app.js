@@ -1,16 +1,28 @@
 const display = document.querySelector('.valueDisplay');
-let displayResult = display.textContent = 0;
+let firstNumber;
+let secondNamber;
+let operator;
+display.textContent = 0;
+let isFirstNumber = false;
 // output botton's value
 const valueButton = document.querySelectorAll('.item')
 valueButton.forEach(valueButton => {
     valueButton.addEventListener('click', (event) =>{
         const target = event.target;
-        display.textContent = target.textContent 
+        display.textContent += target.textContent
     })
 })
 
+const sum = document.querySelector('#add');
+sum.addEventListener('click', () => {
+    const result = operate(firstNumber, "add", secondNumber);
+    display.textContent = result;
+    console.log(display.textContent = result) 
+});
+
 function add (firstNumber, secondNumber){
-    return firstNumber + secondNumber;
+    let result = firstNumber + secondNumber;
+    return display.textContent = result;
 }
 
 function subtract (firstNumber, secondNamber){
