@@ -1,24 +1,44 @@
 const display = document.querySelector('.valueDisplay');
-let firstNumber;
-let secondNamber;
+let firstNumber = 0;
+let secondNamber = 0;
 let operator;
 display.textContent = 0;
-let isFirstNumber = false;
+let isFirstNumber = true;
 // output botton's value
 const valueButton = document.querySelectorAll('.item')
 valueButton.forEach(valueButton => {
     valueButton.addEventListener('click', (event) =>{
         const target = event.target;
-        display.textContent += target.textContent
+        if(isFirstNumber = true){
+            if(firstNumber === 0){
+                firstNumber ='';
+            }
+            firstNumber += target.textContent;
+            console.log('1:', firstNumber);
+        } else{
+            secondNamber += target.textContent;
+            console.log('2:', secondNamber);
+        }
     })
 })
 
-const sum = document.querySelector('#add');
-sum.addEventListener('click', () => {
-    const result = operate(firstNumber, "add", secondNumber);
-    display.textContent = result;
-    console.log(display.textContent = result) 
-});
+const sign = document.querySelectorAll('.operator');
+sign.forEach(sign =>{
+    sign.addEventListener('click', (event)=>{
+        const target = event.target;
+        if (target) {
+            isFirstNumber = false;
+        }
+    })
+}) 
+
+
+// const sum = document.querySelector('#add');
+// sum.addEventListener('click', () => {
+//     const result = operate(firstNumber, "add", secondNumber);
+//     display.textContent = result;
+//     console.log(display.textContent = result) 
+// });
 
 function add (firstNumber, secondNumber){
     let result = firstNumber + secondNumber;
