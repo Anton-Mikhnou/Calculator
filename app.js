@@ -1,6 +1,6 @@
 const display = document.querySelector('.valueDisplay');
 let firstNumber = 0;
-let secondNamber = 0;
+let secondNumber = 0;
 let operator;
 display.textContent = 0;
 let isFirstNumber = true;
@@ -11,9 +11,11 @@ sign.forEach(sign =>{
     sign.addEventListener('click', ()=>{
         isFirstNumber = false;
         display.textContent += sign.textContent
+        operator = sign.textContent;
+        console.log('op:', operator)
     })
 }) 
-
+//click on the number's button
 const valueButton = document.querySelectorAll('.item')
 valueButton.forEach(valueButton => {
     valueButton.addEventListener('click', (event) =>{
@@ -26,52 +28,60 @@ valueButton.forEach(valueButton => {
             display.textContent = firstNumber
             console.log('1:', firstNumber);
         } else{
-            if(secondNamber === 0){
-                secondNamber ='';
+            if(secondNumber === 0){
+                secondNumber ='';
             }
-            secondNamber += target.textContent;
-            display.textContent = secondNamber
-            console.log('2:', secondNamber);
+            secondNumber += target.textContent;
+            display.textContent = secondNumber
+            console.log('2:', secondNumber);
         }
     })
 })
 
+// EventListener botton '=' 
+const equal = document.querySelector('.itemEqual')
+equal.addEventListener('click', () => {
+    const result = operate(firstNumber, operator, secondNumber);
+    display.textContent = result;
+    console.log('res:',display.textContent)
+})
+
+// Clear button
+const clear = document.querySelector('.itemClear');
+clear.addEventListener('click', () => {
+    firstNumber = 0;
+    secondNumber = 0;
+    display.textContent = 0;
+    isFirstNumber = true;
+})
 
 
-
-// const sum = document.querySelector('#add');
-// sum.addEventListener('click', () => {
-//     const result = operate(firstNumber, "add", secondNumber);
-//     display.textContent = result;
-//     console.log(display.textContent = result) 
-// });
 
 function add (firstNumber, secondNumber){
-    let result = firstNumber + secondNumber;
-    return display.textContent = result;
+    return parseFloat(firstNumber) + parseFloat(secondNumber);
 }
 
-function subtract (firstNumber, secondNamber){
-    return firstNumber - secondNumber;
+function subtract (firstNumber, secondNumber){
+    return parseFloat(firstNumber) - parseFloat(secondNumber);
 }
 
 function multiply (firstNumber, secondNumber){
-    return firstNumber * secondNumber;
+    return parseFloat(firstNumber) * parseFloat(secondNumber);
 }
 
 function divide (firstNumber, secondNumber){
-    return firstNumber / secondNumber;
+    return parseFloat(firstNumber) / parseFloat(secondNumber);
 }
 
 function operate(firstNumber, operator, secondNumber) {
-    if (operator === "add"){
+    if (operator === '+'){
         return add(firstNumber, secondNumber) 
-    } else if (operator === "subtract"){
+    } else if (operator === '-'){
         return subtract(firstNumber, secondNumber)
-    } else if (operator === "multiply"){
+    } else if (operator === '*'){
         return multiply(firstNumber, secondNumber) 
-    } else if (operator === "divide"){
+    } else if (operator === '/'){
         return divide(firstNumber, secondNumber) 
     }
+    console.log(firstNumber,':', secondNumber)
 }
-// console.log("1:", operate(firstNumber, operator, secondNumber))
