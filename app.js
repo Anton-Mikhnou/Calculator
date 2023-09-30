@@ -5,32 +5,38 @@ let operator;
 display.textContent = 0;
 let isFirstNumber = true;
 // output botton's value
+
+const sign = document.querySelectorAll('.operator');
+sign.forEach(sign =>{
+    sign.addEventListener('click', ()=>{
+        isFirstNumber = false;
+        display.textContent += sign.textContent
+    })
+}) 
+
 const valueButton = document.querySelectorAll('.item')
 valueButton.forEach(valueButton => {
     valueButton.addEventListener('click', (event) =>{
         const target = event.target;
-        if(isFirstNumber = true){
+        if(isFirstNumber){
             if(firstNumber === 0){
                 firstNumber ='';
             }
             firstNumber += target.textContent;
+            display.textContent = firstNumber
             console.log('1:', firstNumber);
         } else{
+            if(secondNamber === 0){
+                secondNamber ='';
+            }
             secondNamber += target.textContent;
+            display.textContent = secondNamber
             console.log('2:', secondNamber);
         }
     })
 })
 
-const sign = document.querySelectorAll('.operator');
-sign.forEach(sign =>{
-    sign.addEventListener('click', (event)=>{
-        const target = event.target;
-        if (target) {
-            isFirstNumber = false;
-        }
-    })
-}) 
+
 
 
 // const sum = document.querySelector('#add');
