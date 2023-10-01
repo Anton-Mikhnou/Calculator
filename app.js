@@ -5,12 +5,13 @@ let operator;
 display.textContent = 0;
 let isFirstNumber = true;
 // output botton's value
+const output = document.querySelector('.output');
 
 const sign = document.querySelectorAll('.operator');
 sign.forEach(sign =>{
     sign.addEventListener('click', ()=>{
         isFirstNumber = false;
-        display.textContent += sign.textContent
+        display.textContent += sign.textContent;
         operator = sign.textContent;
         console.log('op:', operator)
     })
@@ -38,11 +39,16 @@ valueButton.forEach(valueButton => {
     })
 })
 
+
+
 // EventListener botton '=' 
 const equal = document.querySelector('.itemEqual')
 equal.addEventListener('click', () => {
     const result = operate(firstNumber, operator, secondNumber);
     display.textContent = result;
+    output.textContent = `${firstNumber} ${operator} ${secondNumber}`
+    secondNumber = 0;
+    firstNumber = result
     console.log('res:',display.textContent)
 })
 
@@ -52,6 +58,7 @@ clear.addEventListener('click', () => {
     firstNumber = 0;
     secondNumber = 0;
     display.textContent = 0;
+    output.textContent = '';
     isFirstNumber = true;
 })
 
@@ -83,5 +90,4 @@ function operate(firstNumber, operator, secondNumber) {
     } else if (operator === '/'){
         return divide(firstNumber, secondNumber) 
     }
-    console.log(firstNumber,':', secondNumber)
 }
