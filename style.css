@@ -10,6 +10,10 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url(./imgs/back.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 .container{
@@ -17,9 +21,11 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 300px;
+    width: 280px;
     height: 420px;
-    background-color: aquamarine;
+    background-color: gray;
+    border: 2px solid black;
+    border-radius: 5%;
 }
 
 .display{
@@ -34,13 +40,14 @@ body{
 }
 
 .valueDisplay{
-    /* color: white; */
     font-size: 40px;
+    padding-right: 5px;
 }
 
 .output{
     color: rgba(0, 0, 0, 0.5);
     font-size: 25px;
+    padding-right: 5px;
 }
 
 .panel{
@@ -57,14 +64,29 @@ body{
     grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 2;
+    background-color: orange;
+    font-size: 30px;
+}
+
+.operator{
+    background-color: pink;
+    font-family: cursive;
+    font-size: 25px;
+    font-family: cursive;
 }
 
 .itemEqual{
     grid-column-start:3;
     grid-column-end:5;
+    background-color: pink;
+    font-size: 25px;
+    font-family: cursive;
 }
 
 .item{
     width: 60px;
     height: 60px;
+    background-color: whitesmoke;
+    font-size: 25px;
+    font-family: cursive;
 }

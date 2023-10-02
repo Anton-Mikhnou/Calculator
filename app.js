@@ -11,11 +11,12 @@ const sign = document.querySelectorAll('.operator');
 sign.forEach(sign =>{
     sign.addEventListener('click', ()=>{
         isFirstNumber = false;
-        display.textContent += sign.textContent;
+        display.textContent += sign.textContent
         operator = sign.textContent;
         console.log('op:', operator)
     })
 }) 
+
 //click on the number's button
 const valueButton = document.querySelectorAll('.item')
 valueButton.forEach(valueButton => {
@@ -39,14 +40,12 @@ valueButton.forEach(valueButton => {
     })
 })
 
-
-
 // EventListener botton '=' 
 const equal = document.querySelector('.itemEqual')
 equal.addEventListener('click', () => {
     const result = operate(firstNumber, operator, secondNumber);
     display.textContent = result;
-    output.textContent = `${firstNumber} ${operator} ${secondNumber}`
+    output.textContent = `${firstNumber} ${operator} ${secondNumber}`;
     secondNumber = 0;
     firstNumber = result
     console.log('res:',display.textContent)
@@ -65,19 +64,39 @@ clear.addEventListener('click', () => {
 
 
 function add (firstNumber, secondNumber){
-    return parseFloat(firstNumber) + parseFloat(secondNumber);
+    let res = parseFloat(firstNumber) + parseFloat(secondNumber);
+    if(res % 1 !== 0){
+        return res.toFixed(2);
+    } else{
+        return res;
+    }
 }
 
 function subtract (firstNumber, secondNumber){
-    return parseFloat(firstNumber) - parseFloat(secondNumber);
+    let res = parseFloat(firstNumber) - parseFloat(secondNumber);
+    if(res % 1 !== 0){
+        return res.toFixed(2);
+    } else{
+        return res;
+    }
 }
 
 function multiply (firstNumber, secondNumber){
-    return parseFloat(firstNumber) * parseFloat(secondNumber);
+    let res = parseFloat(firstNumber) * parseFloat(secondNumber);
+    if(res % 1 !== 0){
+        return res.toFixed(2);
+    } else{
+        return res;
+    }
 }
 
 function divide (firstNumber, secondNumber){
-    return parseFloat(firstNumber) / parseFloat(secondNumber);
+    let res = parseFloat(firstNumber) / parseFloat(secondNumber);
+    if(res % 1 !== 0){
+        return res.toFixed(2);
+    } else{
+        return res;
+    }
 }
 
 function operate(firstNumber, operator, secondNumber) {
