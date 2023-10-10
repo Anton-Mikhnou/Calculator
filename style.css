@@ -61,11 +61,20 @@ body{
 
 .itemClear{
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
     background-color: orange;
     font-size: 30px;
+}
+
+.clear{
+    background-color: pink;
+    font-size: 25px;
+    font-family: cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .operator{
