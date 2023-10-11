@@ -1,12 +1,13 @@
 const display = document.querySelector('.valueDisplay');
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber = [0];
+let secondNumber = [0];
 let operator;
 display.textContent = 0;
 let isFirstNumber = true;
 // output botton's value
 const output = document.querySelector('.output');
 
+// operator button
 const sign = document.querySelectorAll('.operator');
 sign.forEach(sign =>{
     sign.addEventListener('click', ()=>{
@@ -14,6 +15,7 @@ sign.forEach(sign =>{
         display.textContent += sign.textContent
         operator = sign.textContent;
         console.log('op:', operator)
+        console.log(isFirstNumber)
     })
 }) 
 
@@ -59,6 +61,22 @@ clear.addEventListener('click', () => {
     display.textContent = 0;
     output.textContent = '';
     isFirstNumber = true;
+})
+
+//Wipe button
+const wipe = document.querySelector('.wipe')
+wipe.addEventListener('click', () => {
+    if(isFirstNumber){
+        firstNumber = firstNumber.slice(0, -1);
+        display.textContent = firstNumber;
+        console.log(firstNumber)
+        console.log(isFirstNumber)
+    } else{
+        console.log(isFirstNumber)
+        secondNumber = secondNumber.slice(0, -1);
+        display.textContent = secondNumber;
+        console.log(secondNumber)
+    }
 })
 
 
