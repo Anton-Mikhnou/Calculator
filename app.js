@@ -34,6 +34,8 @@ sign.forEach(sign => {
             updateDisplay()
             console.log(startValue)
             isOperatorSelect = true;
+        } else if(isOperatorSelect && isEqualSelect === false) {
+            
         } else {
             return;
         }
