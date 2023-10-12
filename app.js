@@ -1,84 +1,78 @@
-const display = document.querySelector('.valueDisplay');
-let firstNumber = [0];
-let secondNumber = [0];
+const valueDisplay = document.querySelector('.valueDisplay');
+let firstNumber = [];
+let secondNumber = [];
 let operator;
-display.textContent = 0;
-let isFirstNumber = true;
-// output botton's value
-const output = document.querySelector('.output');
+let result;
+let startValue = [0];
+valueDisplay.textContent = startValue;
+let isFirstNumber = true; 
+isOperatorSelect = false;
+isEqualSelect = false;
 
-// operator button
+function updateDisplay() {
+    if(isEqualSelect){
+        valueDisplay.textContent = result;
+        isEqualSelect = false;
+    } else{
+        valueDisplay.textContent = startValue.join('');
+    }
+    // for(let i = 0; i < startValue.length; i++){
+    //     valueDisplay.textContent = startValue[i]
+    // }
+    // valueDisplay.textContent = startValue[0] + startValue[1] + startValue[2];
+}
+
+//Operator button
 const sign = document.querySelectorAll('.operator');
-sign.forEach(sign =>{
-    sign.addEventListener('click', ()=>{
-        isFirstNumber = false;
-        display.textContent += sign.textContent
-        operator = sign.textContent;
-        console.log('op:', operator)
-        console.log(isFirstNumber)
-    })
-}) 
-
-//click on the number's button
-const valueButton = document.querySelectorAll('.item')
-valueButton.forEach(valueButton => {
-    valueButton.addEventListener('click', (event) =>{
+sign.forEach(sign => {
+    sign.addEventListener('click', (event) => {
         const target = event.target;
-        if(isFirstNumber){
-            if(firstNumber === 0){
-                firstNumber ='';
-            }
-            firstNumber += target.textContent;
-            display.textContent = firstNumber
-            console.log('1:', firstNumber);
-        } else{
-            if(secondNumber === 0){
-                secondNumber ='';
-            }
-            secondNumber += target.textContent;
-            display.textContent = secondNumber
-            console.log('2:', secondNumber);
+        isFirstNumber = false;
+        if(!isOperatorSelect){
+            operator = target.textContent;
+            startValue[1] = operator;
+            updateDisplay()
+            console.log(startValue)
+            isOperatorSelect = true;
+        } else {
+            return;
         }
     })
 })
 
-// EventListener botton '=' 
-const equal = document.querySelector('.itemEqual')
+// number's button
+const item = document.querySelectorAll('.item')
+item.forEach(item => {
+    item.addEventListener('click', (event) => {
+        const target = event.target;
+        if (isFirstNumber){
+            firstNumber += target.textContent;
+            startValue[0] = firstNumber;
+            console.log(startValue)
+            updateDisplay();
+        } else {
+            secondNumber += target.textContent;
+            startValue[2] = secondNumber;
+            console.log(startValue)
+            updateDisplay();
+        }
+    })
+});
+
+// Button result '='
+const equal = document.querySelector('.itemEqual');
 equal.addEventListener('click', () => {
-    const result = operate(firstNumber, operator, secondNumber);
-    display.textContent = result;
-    output.textContent = `${firstNumber} ${operator} ${secondNumber}`;
-    secondNumber = 0;
-    firstNumber = result
-    console.log('res:',display.textContent)
+    result = operate(firstNumber, operator, secondNumber);
+    isEqualSelect = true;
+    firstNumber = result;
+    startValue[0] = result;
+    secondNumber = [];
+    startValue[2] = '';
+    isFirstNumber = false;
+    isOperatorSelect = false;
+    updateDisplay();
+    console.log(firstNumber);
 })
-
-// Clear button
-const clear = document.querySelector('.itemClear');
-clear.addEventListener('click', () => {
-    firstNumber = 0;
-    secondNumber = 0;
-    display.textContent = 0;
-    output.textContent = '';
-    isFirstNumber = true;
-})
-
-//Wipe button
-const wipe = document.querySelector('.wipe')
-wipe.addEventListener('click', () => {
-    if(isFirstNumber){
-        firstNumber = firstNumber.slice(0, -1);
-        display.textContent = firstNumber;
-        console.log(firstNumber)
-        console.log(isFirstNumber)
-    } else{
-        console.log(isFirstNumber)
-        secondNumber = secondNumber.slice(0, -1);
-        display.textContent = secondNumber;
-        console.log(secondNumber)
-    }
-})
-
 
 
 function add (firstNumber, secondNumber){
