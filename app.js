@@ -1,35 +1,33 @@
 const valueDisplay = document.querySelector('.valueDisplay');
-let startValue = 0;
+let startValue = [0];
 valueDisplay.textContent = startValue;
-let firstNumber = [];
-let secondNumber = [];
-let operator;
-let operation = [];
+let firstNumber = '';
+let secondNumber = '';
+let operator = '';
+let result;
 let isFirstNumber = true;
-let isOperatorSelect = false; 
-console.log(operation)
+let isOperatorSelect = false;
+let isEqualSelect = false;
 
-
-function updateDisplay(){
-    valueDisplay.textContent = operation;
+function updateDisplay (){
+    valueDisplay.textContent = startValue.join('');
 }
+
 //number button
 const valueButton = document.querySelectorAll('.item');
 valueButton.forEach(valueButton => {
     valueButton.addEventListener('click', (event) =>{
         const target = event.target;
-        let count = target.textContent;
-        // startValue = target.textContent;
-        if(isFirstNumber){
-            firstNumber += count;
-            operation[0] = firstNumber;
+        if(isFirstNumber === true){
+            firstNumber += target.textContent;
+            startValue[0] = firstNumber;
+            console.log('1:',firstNumber);
             updateDisplay();
-            console.log('1:', firstNumber)
-        } else{
-            secondNumber += count;
-            operation = secondNumber;
+        } else {
+            secondNumber += target.textContent;
+            startValue[2] = secondNumber;
+            console.log('2:',secondNumber);
             updateDisplay();
-            console.log('2:', secondNumber)
         }
     })
 })
@@ -37,18 +35,34 @@ valueButton.forEach(valueButton => {
 //button operator 
 const operatorBtn = document.querySelectorAll('.operator')
 operatorBtn.forEach(operatorBtn => {
-    operatorBtn.addEventListener('.click', (event) => {
-        const target = event.target;
-        let oper = target.textContent; 
-        isFirstNumber = false
+    operatorBtn.addEventListener('click', (event) => {
         isOperatorSelect = true;
-        operator = oper;
-        operation[1] = operator;
-        console.log('oper:',operator)
-        updateDisplay()
+        isFirstNumber = false;
+        const target = event.target;
+        operator = target.textContent;
+        startValue[1] = operator;
+        updateDisplay();
+        console.log(operator);
     })
 })
 
+//button '=' 
+const equal = document.querySelector('.itemEqual');
+equal.addEventListener('click', () => {
+    isFirstNumber = false;
+    isEqualSelect = true;
+    operate(firstNumber, operator, secondNumber)
+    console.log(operate(firstNumber, operator, secondNumber))
+    result = operate(firstNumber, operator, secondNumber);
+    firstNumber = result;
+    startValue[0] = firstNumber;
+    secondNumber = '';
+    startValue[2] = secondNumber;
+    operator = '';
+    startValue[1] = '';
+    console.log('oper:',operator)
+    updateDisplay();
+})
 
 function add (firstNumber, secondNumber){
     let res = parseFloat(firstNumber) + parseFloat(secondNumber);
