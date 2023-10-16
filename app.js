@@ -1,68 +1,85 @@
 const valueDisplay = document.querySelector('.valueDisplay');
+let firstNumber = [];
+let secondNumber = [];
+let operator;
+let result;
 let startValue = [0];
 valueDisplay.textContent = startValue;
-let firstNumber = '';
-let secondNumber = '';
-let operator = '';
-let result;
-let isFirstNumber = true;
-let isOperatorSelect = false;
-let isEqualSelect = false;
-
-function updateDisplay (){
-    valueDisplay.textContent = startValue.join('');
+let isFirstNumber = true; 
+isOperatorSelect = false;
+isEqualSelect = false;
+function updateDisplay() {
+    if(isEqualSelect){
+        valueDisplay.textContent = result;
+        isEqualSelect = false;
+    } else{
+        valueDisplay.textContent = startValue.join('');
+    }
 }
 
-//number button
-const valueButton = document.querySelectorAll('.item');
-valueButton.forEach(valueButton => {
-    valueButton.addEventListener('click', (event) =>{
+//Operator button
+const sign = document.querySelectorAll('.operator');
+sign.forEach(sign => {
+    sign.addEventListener('click', (event) => {
         const target = event.target;
-        if(isFirstNumber === true){
-            firstNumber += target.textContent;
-            startValue[0] = firstNumber;
-            console.log('1:',firstNumber);
+        isFirstNumber = false;
+        if (!isOperatorSelect) {
+            operator = target.textContent;
+            startValue[1] = operator;
             updateDisplay();
+            isOperatorSelect = true;
         } else {
-            secondNumber += target.textContent;
-            startValue[2] = secondNumber;
-            console.log('2:',secondNumber);
-            updateDisplay();
+            if (secondNumber !== '') {
+                firstNumber = operate(firstNumber, operator, secondNumber);
+                startValue[0] = firstNumber;
+                operator = target.textContent;
+                startValue[1] = operator;
+                secondNumber = '';
+                startValue[2] = '';
+                updateDisplay();
+            }
         }
     })
 })
 
-//button operator 
-const operatorBtn = document.querySelectorAll('.operator')
-operatorBtn.forEach(operatorBtn => {
-    operatorBtn.addEventListener('click', (event) => {
-        isOperatorSelect = true;
-        isFirstNumber = false;
-        const target = event.target;
-        operator = target.textContent;
-        startValue[1] = operator;
-        updateDisplay();
-        console.log(operator);
-    })
-})
 
-//button '=' 
+// number's button
+const item = document.querySelectorAll('.item')
+item.forEach(item => {
+    item.addEventListener('click', (event) => {
+        const target = event.target;
+        if (isFirstNumber){
+            firstNumber += target.textContent;
+            startValue[0] = firstNumber;
+            console.log(startValue)
+            updateDisplay();
+        } else {
+            secondNumber += target.textContent;
+            startValue[2] = secondNumber;
+            console.log(startValue)
+            updateDisplay();
+        }
+    })
+});
+
+// Button result '='
 const equal = document.querySelector('.itemEqual');
 equal.addEventListener('click', () => {
-    isFirstNumber = false;
-    isEqualSelect = true;
-    operate(firstNumber, operator, secondNumber)
-    console.log(operate(firstNumber, operator, secondNumber))
     result = operate(firstNumber, operator, secondNumber);
+    isEqualSelect = true;
     firstNumber = result;
-    startValue[0] = firstNumber;
-    secondNumber = '';
-    startValue[2] = secondNumber;
-    operator = '';
-    startValue[1] = '';
-    console.log('oper:',operator)
+    startValue[0] = result;
+    secondNumber = [];
+    startValue[2] = '';
+    isFirstNumber = false;
+    isOperatorSelect = false;
     updateDisplay();
+    console.log(firstNumber);
 })
+
+
+
+
 
 function add (firstNumber, secondNumber){
     let res = parseFloat(firstNumber) + parseFloat(secondNumber);
