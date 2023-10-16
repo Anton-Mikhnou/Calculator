@@ -8,6 +8,7 @@ valueDisplay.textContent = startValue;
 let isFirstNumber = true; 
 isOperatorSelect = false;
 isEqualSelect = false;
+isPointSelect = false;
 function updateDisplay() {
     if(isEqualSelect){
         valueDisplay.textContent = result;
@@ -41,7 +42,6 @@ sign.forEach(sign => {
         }
     })
 })
-
 
 // number's button
 const item = document.querySelectorAll('.item')
@@ -77,6 +77,34 @@ equal.addEventListener('click', () => {
     console.log(firstNumber);
 })
 
+//Wipe button  ===============================================================
+const wipe = document.querySelector('.wipe')
+wipe.addEventListener('click', () => {
+    if(isFirstNumber){
+        firstNumber = firstNumber.slice(0, -1);
+        startValue[0] = firstNumber;
+        updateDisplay();
+    } else{
+        secondNumber = secondNumber.slice(0, -1);
+        startValue[2] = secondNumber;
+        updateDisplay();
+    }
+})
+
+
+// Clear All 'AC'
+const clear = document.querySelector('.itemClear');
+clear.addEventListener('click', () => {
+    isFirstNumber = true;
+    isOperatorSelect = false;
+    firstNumber = ''
+    startValue[0] = firstNumber;
+    operator = ''
+    startValue[1] = operator;
+    secondNumber = ''
+    startValue[2] = secondNumber;
+    valueDisplay.textContent = 0;
+})
 
 
 
