@@ -1,3 +1,7 @@
+@font-face {
+    font-family: Tilt Neon;
+    src: url(/fonts/TiltNeon-Regular-VariableFont_XROT\,YROT.ttf);
+}
 * {
     margin: 0;
     padding: 0;
@@ -16,6 +20,7 @@ body{
     background-size: cover;
 }
 
+
 .container{
     display: flex;
     flex-direction: column;
@@ -24,8 +29,8 @@ body{
     width: 280px;
     height: 420px;
     background-color: gray;
-    border: 2px solid black;
-    border-radius: 5%;
+    border: 5px solid black;
+    border-radius: 10px;
 }
 
 .display{
@@ -37,6 +42,7 @@ body{
     justify-content: end;
     overflow: hidden;
     flex-direction: column;
+    border: 2px solid black;
 }
 
 .valueDisplay{
@@ -44,19 +50,18 @@ body{
     padding-right: 5px;
 }
 
-.output{
-    color: rgba(0, 0, 0, 0.5);
-    font-size: 25px;
-    padding-right: 5px;
-}
-
 .panel{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    background-color: brown;
     max-width: 290px;
     max-height: 320px;
+    border: 1px solid black;
+}
+
+.both{
+    border: 3px solid black;
+    border-radius: 5px;
 }
 
 .itemClear{
@@ -71,7 +76,7 @@ body{
 .wipe{
     background-color: pink;
     font-size: 25px;
-    font-family: cursive;
+    font-family: Tilt Neon;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,9 +84,8 @@ body{
 
 .operator{
     background-color: pink;
-    font-family: cursive;
     font-size: 25px;
-    font-family: cursive;
+    font-family: Tilt Neon;
 }
 
 .itemEqual{
@@ -89,7 +93,7 @@ body{
     grid-column-end:5;
     background-color: pink;
     font-size: 25px;
-    font-family: cursive;
+    font-family: Tilt Neon;
 }
 
 .item{
@@ -97,7 +101,7 @@ body{
     height: 60px;
     background-color: whitesmoke;
     font-size: 25px;
-    font-family: cursive;
+    font-family: Tilt Neon;
 }
 
 .point{
@@ -105,5 +109,29 @@ body{
     height: 60px;
     background-color: whitesmoke;
     font-size: 25px;
-    font-family: cursive;
+    font-family: Tilt Neon;
+}
+
+.item:hover{
+    background-color: rgba(245, 245, 245, 0.7);
+}
+
+.point:hover{
+    background-color: rgba(245, 245, 245, 0.7);
+}
+
+.operator:hover{
+    background-color: rgba(24, 192, 203, 0.7);
+}
+
+.wipe:hover{
+    background-color: rgba(24, 192, 203, 0.7);
+}
+
+.itemEqual:hover{
+    background-color: rgba(24, 192, 203, 0.7);
+}
+
+.itemClear:hover{
+    background-color: rgba(233, 83, 156, 0.9);
 }

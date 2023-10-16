@@ -9,7 +9,6 @@ let isFirstNumber = true;
 let isOperatorSelect = false;
 let isEqualSelect = false;
 let isPointSelect = false;
-console.log(startValue)
 
 function updateDisplay() {
     if(isEqualSelect){
@@ -42,10 +41,10 @@ sign.forEach(sign => {
                 updateDisplay();
             }
         }
-        console.log(startValue)
     })
 })
 
+// Point button
 const point = document.querySelector('.point');
 point.addEventListener('click', () => {
     if(!firstNumber.includes('.')){
@@ -68,17 +67,14 @@ item.forEach(item => {
         if (isFirstNumber){
             firstNumber += target.textContent;
             startValue[0] = firstNumber;
-            console.log(startValue)
             updateDisplay();
         } else {
             secondNumber += target.textContent;
             startValue[2] = secondNumber;
-            console.log(startValue)
             updateDisplay();
         }
     })
 });
-
 
 // Button result '='
 const equal = document.querySelector('.itemEqual');
@@ -92,7 +88,6 @@ equal.addEventListener('click', () => {
     isFirstNumber = false;
     isOperatorSelect = false;
     updateDisplay();
-    console.log(firstNumber);
 })
 
 //Wipe button  
@@ -107,7 +102,6 @@ wipe.addEventListener('click', () => {
             } else{
                 firstNumber = firstNumber.slice(0, -1);
                 startValue[0] = firstNumber;
-                console.log(isFirstNumber);
                 updateDisplay();
             }
         } else{
@@ -120,8 +114,6 @@ wipe.addEventListener('click', () => {
             }
             secondNumber = secondNumber.slice(0, -1);
             startValue[2] = secondNumber;
-            console.log(isFirstNumber);
-            console.log(startValue)
             updateDisplay();
         }
     } else{
@@ -136,6 +128,7 @@ clear.addEventListener('click', () => {
     isFirstNumber = true;
     isOperatorSelect = false;
     isEqualSelect = false;
+    isPointSelect = false;
     firstNumber = '';
     startValue[0] = firstNumber;
     operator = '';
@@ -144,9 +137,6 @@ clear.addEventListener('click', () => {
     startValue[2] = secondNumber;
     valueDisplay.textContent = 0;
 })
-
-
-
 
 function add (firstNumber, secondNumber){
     let res = parseFloat(firstNumber) + parseFloat(secondNumber);
