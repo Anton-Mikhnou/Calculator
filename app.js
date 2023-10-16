@@ -1,7 +1,7 @@
 const valueDisplay = document.querySelector('.valueDisplay');
-let firstNumber = [];
-let secondNumber = [];
-let operator;
+let firstNumber = '';
+let secondNumber = '';
+let operator = '';
 let result;
 let startValue = [0];
 valueDisplay.textContent = startValue;
@@ -19,7 +19,7 @@ function updateDisplay() {
     }
 }
 
-//Operator button
+// Operator button
 const sign = document.querySelectorAll('.operator');
 sign.forEach(sign => {
     sign.addEventListener('click', (event) => {
@@ -29,6 +29,7 @@ sign.forEach(sign => {
             operator = target.textContent;
             startValue[1] = operator;
             updateDisplay();
+            console.log('oper', operator)
             isOperatorSelect = true;
         } else {
             if (secondNumber !== '') {
@@ -38,6 +39,7 @@ sign.forEach(sign => {
                 startValue[1] = operator;
                 secondNumber = '';
                 startValue[2] = '';
+                console.log('oper', operator)
                 updateDisplay();
             }
         }
@@ -59,7 +61,7 @@ point.addEventListener('click', () => {
     }
 })
 
-// number's button
+// Number's button
 const item = document.querySelectorAll('.item')
 item.forEach(item => {
     item.addEventListener('click', (event) => {
@@ -83,14 +85,14 @@ equal.addEventListener('click', () => {
     isEqualSelect = true;
     firstNumber = result;
     startValue[0] = result;
-    secondNumber = [];
+    secondNumber = '';
     startValue[2] = '';
     isFirstNumber = false;
     isOperatorSelect = false;
     updateDisplay();
 })
 
-//Wipe button  
+// Wipe button  
 const wipe = document.querySelector('.wipe');
 wipe.addEventListener('click', () => {
     if(startValue[0] !== 0){
