@@ -89,6 +89,14 @@ wipe.addEventListener('click', () => {
         startValue[2] = secondNumber;
         updateDisplay();
     }
+    if (operator !== '' && secondNumber === ''){
+        // firstNumber = firstNumber;
+        isOperatorSelect = false
+        operator = '';
+        startValue[1] = operator;
+        isFirstNumber = false;
+        updateDisplay();
+    }
 })
 
 
