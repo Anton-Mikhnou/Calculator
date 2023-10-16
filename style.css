@@ -99,3 +99,11 @@ body{
     font-size: 25px;
     font-family: cursive;
 }
+
+.point{
+    width: 60px;
+    height: 60px;
+    background-color: whitesmoke;
+    font-size: 25px;
+    font-family: cursive;
+}

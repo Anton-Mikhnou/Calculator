@@ -6,9 +6,11 @@ let result;
 let startValue = [0];
 valueDisplay.textContent = startValue;
 let isFirstNumber = true; 
-isOperatorSelect = false;
-isEqualSelect = false;
-isPointSelect = false;
+let isOperatorSelect = false;
+let isEqualSelect = false;
+let isPointSelect = false;
+console.log(startValue)
+
 function updateDisplay() {
     if(isEqualSelect){
         valueDisplay.textContent = result;
@@ -40,7 +42,22 @@ sign.forEach(sign => {
                 updateDisplay();
             }
         }
+        console.log(startValue)
     })
+})
+
+const point = document.querySelector('.point');
+point.addEventListener('click', () => {
+    if(!firstNumber.includes('.')){
+        firstNumber += point.textContent;
+        startValue[0] += point.textContent;
+        updateDisplay();
+    }
+    if(!secondNumber.includes('.') && isFirstNumber === false){
+        secondNumber += point.textContent;
+        startValue[2] += point.textContent;
+        updateDisplay();
+    }
 })
 
 // number's button
@@ -62,6 +79,7 @@ item.forEach(item => {
     })
 });
 
+
 // Button result '='
 const equal = document.querySelector('.itemEqual');
 equal.addEventListener('click', () => {
@@ -77,25 +95,37 @@ equal.addEventListener('click', () => {
     console.log(firstNumber);
 })
 
-//Wipe button  ===============================================================
-const wipe = document.querySelector('.wipe')
+//Wipe button  
+const wipe = document.querySelector('.wipe');
 wipe.addEventListener('click', () => {
-    if(isFirstNumber){
-        firstNumber = firstNumber.slice(0, -1);
-        startValue[0] = firstNumber;
-        updateDisplay();
+    if(startValue[0] !== 0){
+        if(isFirstNumber){
+            if(firstNumber.length === 1){
+                firstNumber = '';
+                startValue[0] = 0;
+                updateDisplay();
+            } else{
+                firstNumber = firstNumber.slice(0, -1);
+                startValue[0] = firstNumber;
+                console.log(isFirstNumber);
+                updateDisplay();
+            }
+        } else{
+            if (operator !== '' && secondNumber === '' || startValue.length === 2 ){
+                isOperatorSelect = false;
+                operator = '';
+                startValue[1] = operator;
+                isFirstNumber = true;
+                updateDisplay();
+            }
+            secondNumber = secondNumber.slice(0, -1);
+            startValue[2] = secondNumber;
+            console.log(isFirstNumber);
+            console.log(startValue)
+            updateDisplay();
+        }
     } else{
-        secondNumber = secondNumber.slice(0, -1);
-        startValue[2] = secondNumber;
-        updateDisplay();
-    }
-    if (operator !== '' && secondNumber === ''){
-        // firstNumber = firstNumber;
-        isOperatorSelect = false
-        operator = '';
-        startValue[1] = operator;
-        isFirstNumber = false;
-        updateDisplay();
+        return;
     }
 })
 
@@ -105,11 +135,12 @@ const clear = document.querySelector('.itemClear');
 clear.addEventListener('click', () => {
     isFirstNumber = true;
     isOperatorSelect = false;
-    firstNumber = ''
+    isEqualSelect = false;
+    firstNumber = '';
     startValue[0] = firstNumber;
-    operator = ''
+    operator = '';
     startValue[1] = operator;
-    secondNumber = ''
+    secondNumber = '';
     startValue[2] = secondNumber;
     valueDisplay.textContent = 0;
 })
@@ -155,15 +186,12 @@ function divide (firstNumber, secondNumber){
 
 function operate(firstNumber, operator, secondNumber) {
     if (operator === '+'){
-        return add(firstNumber, secondNumber) 
+        return add(firstNumber, secondNumber);
     } else if (operator === '-'){
-        return subtract(firstNumber, secondNumber)
+        return subtract(firstNumber, secondNumber);
     } else if (operator === '*'){
-        return multiply(firstNumber, secondNumber) 
+        return multiply(firstNumber, secondNumber);
     } else if (operator === '/'){
-        return divide(firstNumber, secondNumber) 
+        return divide(firstNumber, secondNumber);
     }
 }
-
-
-
