@@ -1,6 +1,6 @@
 const valueDisplay = document.querySelector('.valueDisplay');
-let firstNumber = '';
-let secondNumber = '';
+let firstNumber = [];
+let secondNumber = [];
 let operator = '';
 let result;
 let startValue = [0];
@@ -121,7 +121,7 @@ equal.addEventListener('click', () => {
             isInfinity();
         } else {
             firstNumber = result;
-            startValue[0] = result;
+            startValue[0] = firstNumber;
             operator = '';
             startValue[1] = operator;
             secondNumber = '';
@@ -160,7 +160,7 @@ wipe.addEventListener('click', () => {
             startValue[2] = secondNumber;
             updateDisplay();
         }
-    } else{
+    } else {
         return;
     }
 })
@@ -198,36 +198,36 @@ function isInfinity(){
 function add (firstNumber, secondNumber){
     let res = parseFloat(firstNumber) + parseFloat(secondNumber);
     if(res % 1 !== 0){
-        return res.toFixed(2);
+        return parseFloat(res.toFixed(2));
     } else{
-        return res;
+        return parseFloat(res);
     }
 }
 
 function subtract (firstNumber, secondNumber){
     let res = parseFloat(firstNumber) - parseFloat(secondNumber);
     if(res % 1 !== 0){
-        return res.toFixed(2);
+        return parseFloat(res.toFixed(2));
     } else{
-        return res;
+        return parseFloat(res);
     }
 }
 
 function multiply (firstNumber, secondNumber){
     let res = parseFloat(firstNumber) * parseFloat(secondNumber);
     if(res % 1 !== 0){
-        return res.toFixed(2);
+        return parseFloat(res.toFixed(2));
     } else{
-        return res;
+        return parseFloat(res);
     }
 }
 
 function divide (firstNumber, secondNumber){
     let res = parseFloat(firstNumber) / parseFloat(secondNumber);
     if(res % 1 !== 0){
-        return res.toFixed(2);
+        return parseFloat(res.toFixed(2));
     } else{
-        return res;
+        return parseFloat(res);
     }
 }
 
