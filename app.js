@@ -228,6 +228,7 @@ clear.addEventListener('click', () => {
     valueDisplay.textContent = 0;
 })
 
+
 function isInfinity(){
     isFirstNumber = true; 
     isOperatorSelect = false;

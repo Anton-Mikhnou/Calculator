@@ -20,7 +20,6 @@ body{
     background-size: cover;
 }
 
-
 .container{
     display: flex;
     flex-direction: column;
@@ -40,14 +39,22 @@ body{
     display: flex;
     align-items: end;
     justify-content: end;
-    overflow: hidden;
+    white-space: nowrap;
     flex-direction: column;
     border: 2px solid black;
 }
 
 .valueDisplay{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: end;
+    justify-content: end;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: scroll;
     font-size: 40px;
     padding-right: 5px;
+    user-select: none;
 }
 
 .panel{
@@ -146,4 +153,21 @@ body{
 
 .itemZero:hover{
     background-color: rgba(245, 245, 245, 0.7);
+}
+
+.valueDisplay::-webkit-scrollbar{
+    height: 5px;
+}
+.valueDisplay::-webkit-scrollbar-track{
+    background: #C1CACA;
+}
+
+.valueDisplay::-webkit-scrollbar-thumb {
+    background:  rgba(24, 192, 203, 1);    
+    border: 1px solid slategray;
+    border-radius: 20px;  
+}
+
+.valueDisplay::-webkit-scrollbar-thumb:hover {
+    background: orange;
 }
