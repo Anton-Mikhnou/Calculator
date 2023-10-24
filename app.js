@@ -1,6 +1,6 @@
 const valueDisplay = document.querySelector('.valueDisplay');
-let firstNumber = [];
-let secondNumber = [];
+let firstNumber = '';
+let secondNumber = '';
 let operator = '';
 let result;
 let startValue = [0];
@@ -11,10 +11,10 @@ let isEqualSelect = false;
 let isPointSelect = false;
 
 function updateDisplay() {
-    if(isEqualSelect){
+    if (isEqualSelect){
         valueDisplay.textContent = result;
         isEqualSelect = false;
-    } else{
+    } else {
         valueDisplay.textContent = startValue.join('');
     }
 }
@@ -25,25 +25,31 @@ sign.forEach(sign => {
     sign.addEventListener('click', (event) => {
         const target = event.target;
         isFirstNumber = false;
-        if (!isOperatorSelect) {
-            operator = target.textContent;
-            isOperatorSelect = true;
-            startValue[1] = operator;
-            updateDisplay();
-        } else {
-            if (secondNumber !== '') {
-                firstNumber = operate(firstNumber, operator, secondNumber);
-                if(firstNumber == Infinity){
-                    isInfinity();
-                } else{
-                    startValue[0] = firstNumber;
-                    operator = target.textContent;
-                    startValue[1] = operator;
-                    secondNumber = '';
-                    startValue[2] = '';
-                    updateDisplay();
+        if(valueDisplay.textContent !== 'Error'){
+            if (!isOperatorSelect) {
+                isOperatorSelect = true;
+                operator = target.textContent;
+                startValue[1] = operator;
+                updateDisplay();
+            } else {
+                if (secondNumber !== '') {
+                    firstNumber = operate(firstNumber, operator, secondNumber);
+                    if (firstNumber == Infinity){
+                        isInfinity();
+                    } else {
+                        startValue[0] = firstNumber;
+                        operator = target.textContent;
+                        startValue[1] = operator;
+                        secondNumber = '';
+                        startValue[2] = '';
+                        updateDisplay();
+                    }
                 }
             }
+        } else {
+            isFirstNumber = true;
+            isOperatorSelect = false;
+            isEqualSelect = false;
         }
     })
 })
@@ -51,8 +57,8 @@ sign.forEach(sign => {
 // Point button
 const point = document.querySelector('.point');
 point.addEventListener('click', () => {
-    if(!firstNumber.includes('.') && isFirstNumber === true){
-        if(firstNumber === ''){
+    if (!String(firstNumber).includes('.') && isFirstNumber === true){
+        if (firstNumber === ''){
             startValue[0] = 0;
             firstNumber = 0;
         }
@@ -60,8 +66,8 @@ point.addEventListener('click', () => {
         startValue[0] += point.textContent;
         updateDisplay();
     }
-    if(!secondNumber.includes('.') && isFirstNumber === false){
-        if(secondNumber === ''){
+    if (!String(secondNumber).includes('.') && isFirstNumber === false){
+        if (secondNumber === ''){
             startValue[2] = 0;
             secondNumber = 0;
         }
@@ -92,42 +98,61 @@ item.forEach(item => {
 const equal = document.querySelector('.itemEqual');
 equal.addEventListener('click', () => {
     result = operate(firstNumber, operator, secondNumber);
-    if(firstNumber === ''){
-        isFirstNumber = true;
-        isEqualSelect = true;
-        isOperatorSelect = false;
-        result = secondNumber;
-        firstNumber = secondNumber;
-        startValue[0] = secondNumber;
-        secondNumber = '';
-        startValue[2] = '';
-        updateDisplay();
-    } else if (firstNumber !== '' && secondNumber === ''){
-        isEqualSelect = true;
-        isFirstNumber = true;
-        isOperatorSelect = false;
-        result = firstNumber;
-        startValue[0] = result;
-        operator = '';
-        startValue[1] = operator;
-        secondNumber = '';
-        startValue[2] = secondNumber;
-        updateDisplay();
-    } else {
-        isEqualSelect = true;
-        isFirstNumber = true;
-        isOperatorSelect = false;
-        if(result == Infinity){
-            isInfinity();
-        } else {
-            firstNumber = result;
-            startValue[0] = firstNumber;
+    if(valueDisplay.textContent !== 'Error' && valueDisplay.textContent !== '0') {
+        if (firstNumber === ''){
+            if (operator === '*' || operator ==='/'){
+                isFirstNumber = true;
+                isEqualSelect = true;
+                isOperatorSelect = false;
+                result = 0;
+                firstNumber = '';
+                operator = '';
+                startValue[1] = operator;
+                secondNumber = '';
+                startValue[2] = '';
+                updateDisplay();
+            } else {
+                isFirstNumber = true;
+                isEqualSelect = true;
+                isOperatorSelect = false;
+                result = secondNumber;
+                firstNumber = secondNumber;
+                startValue[0] = secondNumber;
+                secondNumber = '';
+                startValue[2] = '';
+                updateDisplay();
+            }
+        } else if (firstNumber !== '' && secondNumber === ''){
+            isEqualSelect = true;
+            isFirstNumber = true;
+            isOperatorSelect = false;
+            result = firstNumber;
+            startValue[0] = result;
             operator = '';
             startValue[1] = operator;
             secondNumber = '';
             startValue[2] = secondNumber;
             updateDisplay();
+        } else {
+            isEqualSelect = true;
+            isFirstNumber = true;
+            isOperatorSelect = false;
+            if (result == Infinity){
+                isInfinity();
+            } else {
+                firstNumber = result;
+                startValue[0] = firstNumber;
+                operator = '';
+                startValue[1] = operator;
+                secondNumber = '';
+                startValue[2] = secondNumber;
+                updateDisplay();
+            }
         }
+    } else{
+        isFirstNumber = true;
+        isOperatorSelect = false;
+        isEqualSelect = false;
     }
 })
 
@@ -138,8 +163,8 @@ wipe.addEventListener('click', () => {
         startValue[0] = 0;
         updateDisplay();
     } else if(startValue[0] !== 0){
-        if(isFirstNumber){
-            if(firstNumber.length === 1){
+        if (isFirstNumber){
+            if (firstNumber.length === 1){
                 firstNumber = '';
                 startValue[0] = 0;
                 updateDisplay();
@@ -148,7 +173,7 @@ wipe.addEventListener('click', () => {
                 startValue[0] = firstNumber;
                 updateDisplay();
             }
-        } else{
+        } else {
             if (operator !== '' && secondNumber === '' || startValue.length === 2 ){
                 isOperatorSelect = false;
                 operator = '';
@@ -164,6 +189,28 @@ wipe.addEventListener('click', () => {
         return;
     }
 })
+
+//Zero button
+const zero = document.querySelector('.itemZero');
+zero.addEventListener('click', () => {
+    if (isFirstNumber) {
+        if (firstNumber === '0') {
+            firstNumber = '0';
+        } else {
+            firstNumber += '0';
+        }
+        startValue[0] = firstNumber;
+        updateDisplay();
+    } else {
+        if (secondNumber === '0') {
+            secondNumber = '0';
+        } else {
+            secondNumber += '0';
+        }
+        startValue[2] = secondNumber;
+        updateDisplay();
+    }
+});
 
 // Clear All 'AC'
 const clear = document.querySelector('.itemClear');
