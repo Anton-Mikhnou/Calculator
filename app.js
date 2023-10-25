@@ -1,5 +1,5 @@
 const valueDisplay = document.querySelector('.valueDisplay');
-let firstNumber = '';
+let firstNumber = '0';
 let secondNumber = '';
 let operator = '';
 let result;
@@ -31,20 +31,14 @@ sign.forEach(sign => {
                 operator = target.textContent;
                 startValue[1] = operator;
                 updateDisplay();
-            } else {
-                if (secondNumber !== '') {
-                    firstNumber = operate(firstNumber, operator, secondNumber);
-                    if (firstNumber == Infinity){
-                        isInfinity();
-                    } else {
-                        startValue[0] = firstNumber;
-                        operator = target.textContent;
-                        startValue[1] = operator;
-                        secondNumber = '';
-                        startValue[2] = '';
-                        updateDisplay();
-                    }
-                }
+            } else if (secondNumber !== '') {
+                firstNumber = operate(firstNumber, operator, secondNumber);
+                startValue[0] = firstNumber;
+                operator = target.textContent;
+                startValue[1] = operator;
+                secondNumber = '';
+                startValue[2] = '';
+                updateDisplay();
             }
         } else {
             isFirstNumber = true;
@@ -83,9 +77,16 @@ item.forEach(item => {
     item.addEventListener('click', (event) => {
         const target = event.target;
         if (isFirstNumber){
-            firstNumber += target.textContent;
-            startValue[0] = firstNumber;
-            updateDisplay();
+            if(firstNumber === '0'){
+                firstNumber = '';
+                firstNumber += target.textContent;
+                startValue[0] = firstNumber;
+                updateDisplay();
+            } else {
+                firstNumber += target.textContent;
+                startValue[0] = firstNumber;
+                updateDisplay();
+            }
         } else {
             secondNumber += target.textContent;
             startValue[2] = secondNumber;
@@ -105,7 +106,7 @@ equal.addEventListener('click', () => {
                 isEqualSelect = true;
                 isOperatorSelect = false;
                 result = 0;
-                firstNumber = '';
+                firstNumber = ''; 
                 operator = '';
                 startValue[1] = operator;
                 secondNumber = '';
@@ -161,7 +162,7 @@ wipe.addEventListener('click', () => {
     } else if(startValue[0] !== 0){
         if (isFirstNumber){
             if (firstNumber.length === 1){
-                firstNumber = '';
+                firstNumber = '0';
                 startValue[0] = 0;
                 updateDisplay();
             } else{
@@ -215,7 +216,7 @@ clear.addEventListener('click', () => {
     isOperatorSelect = false;
     isEqualSelect = false;
     isPointSelect = false;
-    firstNumber = '';
+    firstNumber = '0'; //========
     startValue[0] = 0;
     operator = '';
     startValue[1] = operator;
@@ -230,7 +231,7 @@ function isInfinity(){
     isEqualSelect = false;
     isPointSelect = false;
     valueDisplay.textContent = 'Error';
-    firstNumber = '';
+    firstNumber = '';    
     startValue[0] = firstNumber;
     operator = '';
     startValue[1] = operator
