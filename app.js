@@ -216,7 +216,7 @@ clear.addEventListener('click', () => {
     isOperatorSelect = false;
     isEqualSelect = false;
     isPointSelect = false;
-    firstNumber = '0'; //========
+    firstNumber = '0';
     startValue[0] = 0;
     operator = '';
     startValue[1] = operator;
